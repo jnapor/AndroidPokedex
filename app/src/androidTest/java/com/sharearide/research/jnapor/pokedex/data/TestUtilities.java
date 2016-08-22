@@ -1,8 +1,10 @@
 package com.sharearide.research.jnapor.pokedex.data;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -89,5 +91,26 @@ public class TestUtilities extends AndroidTestCase{
 
     static TestContentObserver getTestContentObserver() {
         return TestContentObserver.getTestContentObserver();
+    }
+
+    static ContentValues createGrassTypePokemonTypeValues(){
+        ContentValues testValues = new ContentValues();
+        testValues.put(PokedexContract.PokemonType.COLUMN_POKEMON_TYPE, "Grass");
+
+        return testValues;
+    }
+
+    static long insertGrassTypePokemonTypeValues(Context context){
+        PokemonDBHelper dbHelper = new PokemonDBHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues testValues = TestUtilities.createGrassTypePokemonTypeValues();
+
+        long locationRowId;
+        locationRowId = db.insert(PokedexContract.PokemonType.TABLE_NAME, null, testValues);
+
+        //Verify if successfully inserted
+        assertTrue("Error: Failure to insert Grass Type Pokemon Value", locationRowId != -1);
+
+        return locationRowId;
     }
 }

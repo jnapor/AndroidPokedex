@@ -22,18 +22,19 @@ public class PokemonDBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        final String SQL_CREATE_POKEMON_TABLE = "CREATE TABLE" + Pokemon.TABLE_NAME + " ( " +
-                Pokemon._ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                Pokemon.COLUMN_POKEMON_NAME + "TEXT NOT NULL, " +
-                Pokemon.COLUMN_POKEMON_TYPE_ID + "TEXT NOT NULL, " +
-                Pokemon.COLUMN_POKEMON_DESC + "TEXT NOT NULL, " +
+        final String SQL_CREATE_POKEMON_TABLE = "CREATE TABLE " + Pokemon.TABLE_NAME + " ( " +
+                Pokemon._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                Pokemon.COLUMN_POKEMON_NAME + " TEXT NOT NULL, " +
+                Pokemon.COLUMN_POKEMON_TYPE_ID + " TEXT NOT NULL, " +
+                Pokemon.COLUMN_POKEMON_DESC + " TEXT NOT NULL, " +
                 " FOREIGN KEY (" + Pokemon.COLUMN_POKEMON_TYPE_ID + ") REFERENCES " +
-                PokemonType.TABLE_NAME + " (" + PokemonType._ID + ")";
+                PokemonType.TABLE_NAME + " (" + PokemonType._ID + "))";
 
-        final String SQL_CREATE_POKEMON_TYPE_TABLE = "CREATE TABLE" + PokemonType.TABLE_NAME + " ( " +
-                PokemonType._ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
-                PokemonType.COLUMN_POKEMON_TYPE + "TEXT NOT NULL" + ")";
+        final String SQL_CREATE_POKEMON_TYPE_TABLE = "CREATE TABLE " + PokemonType.TABLE_NAME + " ( " +
+                PokemonType._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                PokemonType.COLUMN_POKEMON_TYPE + " TEXT NOT NULL" + ")";
 
+        sqLiteDatabase.execSQL(SQL_CREATE_POKEMON_TYPE_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_POKEMON_TABLE);
     }
     @Override
