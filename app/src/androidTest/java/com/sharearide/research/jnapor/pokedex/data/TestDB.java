@@ -1,5 +1,6 @@
 package com.sharearide.research.jnapor.pokedex.data;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
@@ -67,5 +68,31 @@ public class TestDB extends AndroidTestCase{
         assertTrue("Error: The database doesn't contain all of the required location entry columns",
                 pokemontypeColumnHashSet.isEmpty());
         db.close();
+    }
+
+    public void testPokemonTypeTable(){
+        PokemonDBHelper pokemonDBHelper = new PokemonDBHelper(mContext);
+        SQLiteDatabase sqLiteDatabase = pokemonDBHelper.getWritableDatabase();
+
+        ContentValues contentValues = TestUtilities.createGrassTypePokemonTypeValues();
+
+        long row = sqLiteDatabase.insert(PokedexContract.PokemonType.TABLE_NAME, null, contentValues);
+
+        assertTrue(row != -1);
+
+        Cursor c = sqLiteDatabase.query(
+                PokedexContract.PokemonType.TABLE_NAME,
+                null, //all columns
+                null, //condition
+                null, //values for the condition
+                null, //group by
+                null, //row group
+                null //sort order
+        );
+
+        assertTrue("Error: No records found by pokemon type query", c.moveToFirst());
+
+        c.close();
+        sqLiteDatabase.close();
     }
 }

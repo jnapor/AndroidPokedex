@@ -39,7 +39,7 @@ public class TestUtilities extends AndroidTestCase{
         }
     }
 
-    static ContentValues createPokemonValues(int pokemonTypeId){
+    static ContentValues createPokemonValues(long pokemonTypeId){
         ContentValues pokemon = new ContentValues();
         pokemon.put(PokedexContract.Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
         pokemon.put(PokedexContract.Pokemon.COLUMN_POKEMON_NAME, "Bulbasaur");
@@ -100,13 +100,53 @@ public class TestUtilities extends AndroidTestCase{
         return testValues;
     }
 
-    static long insertGrassTypePokemonTypeValues(Context context){
-        PokemonDBHelper dbHelper = new PokemonDBHelper(context);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+    public void insertGrassTypePokemonTypeValues(Context context){
+        insertPokemonType();
+    }
+
+    public void insertPokemon(){
+        long locationRowId = insertPokemonType();
+        assertFalse("Error: Pokemon Type Not Inserted Correctly", locationRowId == -1L);
+        PokemonDBHelper pokemonDBHelper = new PokemonDBHelper(mContext);
+        SQLiteDatabase sqLiteDatabase = pokemonDBHelper.getWritableDatabase();
+
+        ContentValues pokemonValues = TestUtilities.createPokemonValues(locationRowId);
+        long pokemonRowId = sqLiteDatabase.insert(PokedexContract.Pokemon.TABLE_NAME, null, pokemonValues);
+
+        assertTrue(pokemonRowId != -1);
+
+        Cursor pokemonCursor = sqLiteDatabase.query(
+                PokedexContract.Pokemon.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        TestUtilities.validateCurrentRecord("testInsertReadDB failed to validate", pokemonCursor,pokemonValues);
+        pokemonCursor.close();
+        sqLiteDatabase.close();
+    }
+
+    public long insertPokemonType(){
+        PokemonDBHelper pokemonDBHelper = new PokemonDBHelper(mContext);
+        SQLiteDatabase sqLiteDatabase = pokemonDBHelper.getWritableDatabase();
         ContentValues testValues = TestUtilities.createGrassTypePokemonTypeValues();
 
         long locationRowId;
-        locationRowId = db.insert(PokedexContract.PokemonType.TABLE_NAME, null, testValues);
+        locationRowId = sqLiteDatabase.insert(PokedexContract.PokemonType.TABLE_NAME, null, testValues);
+
+        Cursor c = sqLiteDatabase.query(
+                PokedexContract.PokemonType.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
 
         //Verify if successfully inserted
         assertTrue("Error: Failure to insert Grass Type Pokemon Value", locationRowId != -1);
