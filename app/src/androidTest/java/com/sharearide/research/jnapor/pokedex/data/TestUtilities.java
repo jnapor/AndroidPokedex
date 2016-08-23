@@ -19,6 +19,9 @@ import java.util.Set;
  * Created by jnapor on 8/22/2016.
  */
 public class TestUtilities extends AndroidTestCase{
+    static String TEST_POKEMON = "Balbasaur";
+    static String TEST_TYPE = "Grass";
+
 
     static void validateCursor(String error, Cursor valueCursor, ContentValues expectedValues){
         assertTrue("Empty cursor returned" + error, valueCursor.moveToFirst());
@@ -42,7 +45,7 @@ public class TestUtilities extends AndroidTestCase{
     static ContentValues createPokemonValues(long pokemonTypeId){
         ContentValues pokemon = new ContentValues();
         pokemon.put(PokedexContract.Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
-        pokemon.put(PokedexContract.Pokemon.COLUMN_POKEMON_NAME, "Bulbasaur");
+        pokemon.put(PokedexContract.Pokemon.COLUMN_POKEMON_NAME, TEST_POKEMON);
         pokemon.put(PokedexContract.Pokemon.COLUMN_POKEMON_DESC,"Seed Pokemon");
 
         return pokemon;
@@ -50,7 +53,7 @@ public class TestUtilities extends AndroidTestCase{
 
     static ContentValues createGrassTypePokemonTypeValues(){
         ContentValues testValues = new ContentValues();
-        testValues.put(PokedexContract.PokemonType.COLUMN_POKEMON_TYPE, "Grass");
+        testValues.put(PokedexContract.PokemonType.COLUMN_POKEMON_TYPE, TEST_TYPE);
 
         return testValues;
     }

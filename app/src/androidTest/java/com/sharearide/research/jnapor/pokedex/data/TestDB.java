@@ -32,7 +32,7 @@ public class TestDB extends AndroidTestCase{
         assertEquals(true, db.isOpen());
 
         // have we created the tables we want?
-                Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+        Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
 
         assertTrue("Error: This means that the database has not been created correctly",
                 c.moveToFirst());

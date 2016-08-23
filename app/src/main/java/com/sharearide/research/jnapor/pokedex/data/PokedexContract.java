@@ -17,6 +17,8 @@ public class PokedexContract {
 
     public static final String PATH_POKEMON = "pokemon";
 
+
+
     public static final class PokemonType implements BaseColumns{
         public static final String TABLE_NAME = "pokemontype";
 
@@ -35,6 +37,8 @@ public class PokedexContract {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
+
+
 
     public static final class Pokemon implements BaseColumns{
         public static final String TABLE_NAME = "pokemon";

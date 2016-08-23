@@ -2,6 +2,7 @@ package com.sharearide.research.jnapor.pokedex.data;
 
 import android.content.ComponentName;
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.content.pm.PackageManager;
@@ -15,6 +16,7 @@ import com.sharearide.research.jnapor.pokedex.data.PokedexContract.Pokemon;
 import com.sharearide.research.jnapor.pokedex.data.PokedexContract.PokemonType;
 
 import android.test.AndroidTestCase;
+import android.util.Log;
 
 
 public class TestProvider extends AndroidTestCase {
@@ -96,13 +98,13 @@ public class TestProvider extends AndroidTestCase {
         assertEquals("Error: Pokemon CONTENT_URI should return Pokemon.CONTENT_TYPE",
                 Pokemon.CONTENT_TYPE, type);
 
-        String testType = "Grass";
+        String testType = TestUtilities.TEST_TYPE;
         type = mContext.getContentResolver().getType(Pokemon.buildPokemonPokeType(type));
 
         assertEquals("Error: The Pokemon CONTENT_URI with type should return Pokemon.CONTENT_TYPE",
                 Pokemon.CONTENT_TYPE, type);
 
-        String name = "Balbasaur";
+        String name = TestUtilities.TEST_POKEMON;
         type = mContext.getContentResolver().getType(
                 Pokemon.buildPokemonPokeTypeWithName(testType, name));
         assertEquals("Error: The Pokemon CONTENT_URI with type and name should return Pokemon.CONTENT_ITEM_TYPE",
@@ -153,6 +155,74 @@ public class TestProvider extends AndroidTestCase {
         );
 
         TestUtilities.validateCursor("testBasicQueries, location query", pokemonCursor, contentValues);
+    }
 
+    public void testInsertReadProvider(){
+        ContentValues contentValues = TestUtilities.createGrassTypePokemonTypeValues();
+        TestUtilities.TestContentObserver testContentObserver = TestUtilities.getTestContentObserver();
+        mContext.getContentResolver().registerContentObserver(PokemonType.CONTENT_URI, true, testContentObserver);
+
+        Uri pokemonTypeUri = mContext.getContentResolver().insert(PokemonType.CONTENT_URI, contentValues);
+
+        testContentObserver.waitForNotificationOrFail();
+        mContext.getContentResolver().unregisterContentObserver(testContentObserver);
+
+        long pokemonRowId = ContentUris.parseId(pokemonTypeUri);
+
+        assertTrue(pokemonRowId != -1);
+
+        Cursor cursor = mContext.getContentResolver().query(
+                PokemonType.CONTENT_URI,
+                null,
+                null,
+                null,
+                null
+        );
+
+        TestUtilities.validateCursor("testInsertReadProvider. Error PokemonType", cursor, contentValues);
+
+        ContentValues pokemonValues = TestUtilities.createPokemonValues(pokemonRowId);
+
+        testContentObserver = TestUtilities.getTestContentObserver();
+        mContext.getContentResolver().registerContentObserver(Pokemon.CONTENT_URI, true, testContentObserver);
+
+        Uri pokemonInsertionUri = mContext.getContentResolver().insert(Pokemon.CONTENT_URI, pokemonValues);
+
+        assertTrue(pokemonInsertionUri != null);
+
+        testContentObserver.waitForNotificationOrFail();
+        mContext.getContentResolver().unregisterContentObserver(testContentObserver);
+
+        Cursor pokemonCursor = mContext.getContentResolver().query(
+                Pokemon.CONTENT_URI,
+                null,
+                null,
+                null,
+                null
+        );
+        TestUtilities.validateCursor("Error validating Pokemon Insert", pokemonCursor, pokemonValues);
+
+        pokemonValues.putAll(contentValues);
+
+        pokemonCursor = mContext.getContentResolver().query(
+                Pokemon.buildPokemonPokeType(TestUtilities.TEST_TYPE),
+                null,
+                null,
+                null,
+                null
+        );
+
+        TestUtilities.validateCursor("Error validating joined pokemon and pokemon type", pokemonCursor, pokemonValues);
+
+        pokemonCursor = mContext.getContentResolver().query(
+                Pokemon.buildPokemonPokeTypeWithName(TestUtilities.TEST_TYPE,TestUtilities.TEST_POKEMON),
+                null,
+                null,
+                null,
+                null
+        );
+
+        TestUtilities.validateCursor("Error validating joined pokemon and pokemon type for a specific name",
+                pokemonCursor, pokemonValues);
     }
 }

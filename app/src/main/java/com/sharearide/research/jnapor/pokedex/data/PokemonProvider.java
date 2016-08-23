@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.util.Log;
 
 /**
  * Created by jnapor on 8/23/2016.
@@ -59,7 +60,7 @@ public class PokemonProvider extends ContentProvider {
 
     private Cursor getPokemonByTypeAndName(Uri uri, String[] projection, String order){
         String type = PokedexContract.Pokemon.getPokemonTypeFromUri(uri);
-        String name = PokedexContract.Pokemon.getPokemonTypeFromUri(uri);
+        String name = PokedexContract.Pokemon.getPokemonNameFromUri(uri);
 
         return mPokemonByTypeQueryBuilder.query(
                 mPokedexHelper.getReadableDatabase(),
@@ -165,6 +166,15 @@ public class PokemonProvider extends ContentProvider {
                 long _id = sqLiteDatabase.insert(PokedexContract.Pokemon.TABLE_NAME, null, contentValues);
                 if(_id > 0){
                     retUri = PokedexContract.Pokemon.buildPokemonUri(_id);
+                }else{
+                    throw new android.database.SQLException("Failed to insert row into "+uri);
+                }
+                break;
+            }
+            case POKEMON_TYPE:{
+                long _id = sqLiteDatabase.insert(PokedexContract.PokemonType.TABLE_NAME, null, contentValues);
+                if(_id > 0){
+                    retUri = PokedexContract.PokemonType.buildPokemonTypeUri(_id);
                 }else{
                     throw new android.database.SQLException("Failed to insert row into "+uri);
                 }
