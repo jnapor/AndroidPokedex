@@ -15,6 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="com.sharearide.research.jnapor.pokedex"
+            android:name=".data.PokemonProvider"/>
     </application>
 
 </manifest>
