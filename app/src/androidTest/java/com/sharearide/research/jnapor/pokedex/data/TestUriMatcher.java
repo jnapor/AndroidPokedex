@@ -10,7 +10,15 @@ import android.test.AndroidTestCase;
 public class TestUriMatcher extends AndroidTestCase{
     private static final String POKEMON_TYPE = "Grass";
     private static final String POKEMON_NAME = "Balbasaur";
+    private static final String USER_NAME = TestUtilities.TEST_USERNAME;
+    private static final String PASSWORD = TestUtilities.TEST_PASSWORD;
 
+    private static final Uri TEST_USER_DIR = PokedexContract.Users.CONTENT_URI;
+
+    private static final Uri TEST_USER_WITH_USERNAME = PokedexContract.Users.buildUsersWithUserName(USER_NAME);
+
+    private static final Uri TEST_USERNAME_WITH_USERNAME_AND_PASSWORD = PokedexContract
+            .Users.buildUserLogin(USER_NAME, PASSWORD);
 
     private static final Uri TEST_POKEMON_DIR = PokedexContract.Pokemon.CONTENT_URI;
 
@@ -36,5 +44,16 @@ public class TestUriMatcher extends AndroidTestCase{
 
         assertEquals("Error: The POKEMON TYPE URI was matched incorrectly",
                 uriMatcher.match(TEST_POKEMONTYPE_DIR), PokemonProvider.POKEMON_TYPE);
+
+        assertEquals("Error: The USER URI was matched incorrectly.",
+                uriMatcher.match(TEST_USER_DIR), PokemonProvider.USERS);
+
+        assertEquals("Error: The USER WITH USERNAME URI was matched incorrectly.",
+                uriMatcher.match(TEST_USER_WITH_USERNAME), PokemonProvider.USERS_WITH_USERNAME);
+
+        assertEquals("Error: The USER WITH USERNAME AND PASSWORD URI was matched incorrectly.",
+                uriMatcher.match(TEST_USERNAME_WITH_USERNAME_AND_PASSWORD), PokemonProvider.USERS_WTIH_USERNAME_AND_PASSWORD);
+
+
     }
 }

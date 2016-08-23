@@ -20,6 +20,9 @@ public class PokemonProvider extends ContentProvider {
     static final int POKEMON_WITH_TYPE = 101;
     static final int POKEMON_WITH_TYPE_AND_NAME = 102;
     static final int POKEMON_TYPE = 300;
+    static final int USERS = 500;
+    static final int USERS_WITH_USERNAME = 501;
+    static final int USERS_WTIH_USERNAME_AND_PASSWORD = 502;
 
     private static final SQLiteQueryBuilder mPokemonByTypeQueryBuilder;
 
@@ -36,12 +39,14 @@ public class PokemonProvider extends ContentProvider {
         );
     }
 
+
     private static final String mPokemonType = PokedexContract.PokemonType.TABLE_NAME + "." +
             PokedexContract.PokemonType.COLUMN_POKEMON_TYPE + " = ?";
 
     private static final String mPokemonTypeAndName = PokedexContract.PokemonType.TABLE_NAME + "." +
             PokedexContract.PokemonType.COLUMN_POKEMON_TYPE + " = ? AND " +
             PokedexContract.Pokemon.COLUMN_POKEMON_NAME + " = ? ";
+
 
     private Cursor getPokemonByType(Uri uri, String[] projection, String order){
         String type = PokedexContract.Pokemon.getPokemonTypeFromUri(uri);
@@ -73,10 +78,14 @@ public class PokemonProvider extends ContentProvider {
         );
     }
 
+
     static UriMatcher buildUriMatcher(){
         final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = PokedexContract.CONTENT_AUTHORITY;
 
+        uriMatcher.addURI(authority, PokedexContract.PATH_USERS, USERS);
+        uriMatcher.addURI(authority, PokedexContract.PATH_USERS + "/*", USERS_WITH_USERNAME);
+        uriMatcher.addURI(authority, PokedexContract.PATH_USERS + "/*/*", USERS_WTIH_USERNAME_AND_PASSWORD);
         uriMatcher.addURI(authority, PokedexContract.PATH_POKEMON, POKEMON);
         uriMatcher.addURI(authority, PokedexContract.PATH_POKEMON + "/*", POKEMON_WITH_TYPE);
         uriMatcher.addURI(authority, PokedexContract.PATH_POKEMON + "/*/*", POKEMON_WITH_TYPE_AND_NAME);
@@ -129,6 +138,42 @@ public class PokemonProvider extends ContentProvider {
                 );
                 break;
             }
+            case USERS: {
+                retCursor = mPokedexHelper.getReadableDatabase().query(
+                        PokedexContract.Users.TABLE_NAME,
+                        projection,
+                        selection,
+                        args,
+                        null,
+                        null,
+                        order
+                );
+                break;
+            }
+            case USERS_WITH_USERNAME: {
+                retCursor = mPokedexHelper.getReadableDatabase().query(
+                        PokedexContract.Users.TABLE_NAME,
+                        projection,
+                        selection,
+                        args,
+                        null,
+                        null,
+                        order
+                );
+                break;
+            }
+            case USERS_WTIH_USERNAME_AND_PASSWORD: {
+                retCursor = mPokedexHelper.getReadableDatabase().query(
+                        PokedexContract.Users.TABLE_NAME,
+                        projection,
+                        selection,
+                        args,
+                        null,
+                        null,
+                        order
+                );
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown Uri: "+ uri);
         }
@@ -150,6 +195,12 @@ public class PokemonProvider extends ContentProvider {
                 return PokedexContract.Pokemon.CONTENT_TYPE;
             case POKEMON_TYPE:
                 return PokedexContract.PokemonType.CONTENT_TYPE;
+            case USERS:
+                return PokedexContract.Users.CONTENT_TYPE;
+            case USERS_WITH_USERNAME:
+                return PokedexContract.Users.CONTENT_TYPE;
+            case USERS_WTIH_USERNAME_AND_PASSWORD:
+                return PokedexContract.Users.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: "+ uri);
         }
@@ -175,6 +226,15 @@ public class PokemonProvider extends ContentProvider {
                 long _id = sqLiteDatabase.insert(PokedexContract.PokemonType.TABLE_NAME, null, contentValues);
                 if(_id > 0){
                     retUri = PokedexContract.PokemonType.buildPokemonTypeUri(_id);
+                }else{
+                    throw new android.database.SQLException("Failed to insert row into "+uri);
+                }
+                break;
+            }
+            case USERS:{
+                long _id = sqLiteDatabase.insert(PokedexContract.Users.TABLE_NAME, null, contentValues);
+                if(_id > 0){
+                    retUri = PokedexContract.Users.buildUsersTypeFromUri(_id);
                 }else{
                     throw new android.database.SQLException("Failed to insert row into "+uri);
                 }
@@ -208,6 +268,11 @@ public class PokemonProvider extends ContentProvider {
                         PokedexContract.PokemonType.TABLE_NAME, selection , args
                 );
                 break;
+            case USERS:
+                rowsDeleted = sqLiteDatabase.delete(
+                        PokedexContract.Users.TABLE_NAME, selection, args
+                );
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: "+ uri);
         }
@@ -232,6 +297,10 @@ public class PokemonProvider extends ContentProvider {
                 rowsUpdated = sqLiteDatabase.update(PokedexContract.PokemonType.TABLE_NAME,
                         contentValues, selection, args);
                 break;
+            case USERS:
+                rowsUpdated = sqLiteDatabase.update(PokedexContract.Users.TABLE_NAME,
+                        contentValues, selection, args);
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: "+ uri);
         }
@@ -246,7 +315,6 @@ public class PokemonProvider extends ContentProvider {
     public int bulkInsert(Uri uri, ContentValues[] values) {
         final SQLiteDatabase sqLiteDatabase = mPokedexHelper.getWritableDatabase();
         final int match = mUriMatcher.match(uri);
-        Uri retUri;
         int count = 0;
         switch (match) {
             case POKEMON:{

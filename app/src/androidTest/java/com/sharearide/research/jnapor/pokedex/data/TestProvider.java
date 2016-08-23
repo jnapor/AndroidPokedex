@@ -11,6 +11,7 @@ import android.net.Uri;
 
 import com.sharearide.research.jnapor.pokedex.data.PokedexContract.Pokemon;
 import com.sharearide.research.jnapor.pokedex.data.PokedexContract.PokemonType;
+import com.sharearide.research.jnapor.pokedex.data.PokedexContract.Users;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -28,6 +29,12 @@ public class TestProvider extends AndroidTestCase {
 
         mContext.getContentResolver().delete(
                 PokemonType.CONTENT_URI,
+                null,
+                null
+        );
+
+        mContext.getContentResolver().delete(
+                Users.CONTENT_URI,
                 null,
                 null
         );
@@ -52,6 +59,17 @@ public class TestProvider extends AndroidTestCase {
         );
 
         assertEquals("Error: Records not deleted from PokemonType table during delete", 0 , cursor.getCount());
+
+
+        cursor = mContext.getContentResolver().query(
+                Users.CONTENT_URI,
+                null,
+                null,
+                null,
+                null
+        );
+
+        assertEquals("Error: Records not deleted from PokemonType table during delete", 0 , cursor.getCount());
         cursor.close();
     }
 
@@ -60,7 +78,8 @@ public class TestProvider extends AndroidTestCase {
         SQLiteDatabase sqLiteDatabase = pokemonDBHelper.getWritableDatabase();
 
         sqLiteDatabase.delete(Pokemon.TABLE_NAME,null,null);
-        sqLiteDatabase.delete(Pokemon.TABLE_NAME,null,null);
+        sqLiteDatabase.delete(PokemonType.TABLE_NAME,null,null);
+        sqLiteDatabase.delete(Users.TABLE_NAME, null,null);
         sqLiteDatabase.close();
     }
 
@@ -109,6 +128,19 @@ public class TestProvider extends AndroidTestCase {
 
         type = mContext.getContentResolver().getType(PokemonType.CONTENT_URI);
         assertEquals("Error: The PokemonType URI should return PokemonType.CONTENT_TYPE", PokemonType.CONTENT_TYPE, type);
+
+        String username = TestUtilities.TEST_USERNAME;
+        type = mContext.getContentResolver().getType(Users.CONTENT_URI);
+        assertEquals("Error: The USERS CONTENT_URI with type and name should return USERS.CONTENT_TYPE", Users.CONTENT_TYPE, type);
+
+        type  = mContext.getContentResolver().getType(Users.buildUsersWithUserName(TestUtilities.TEST_USERNAME));
+        assertEquals("Error: The USERS_WITH_USERNAME_AND PASSWORD URI with type and name should return USERS.CONTENT_TYPE",
+                Users.CONTENT_TYPE, type);
+
+        type = mContext.getContentResolver().getType(Users.buildUserLogin(TestUtilities
+                .TEST_USERNAME, TestUtilities.TEST_PASSWORD));
+        assertEquals("Error: The USERS_WITH_USERNAME_AND PASSWORD URI with type and name should return USERS.CONTENT_ITEM_TYPE",
+                Users.CONTENT_ITEM_TYPE, type);
     }
 
     public void testBasicPokemonQuery(){
@@ -179,7 +211,6 @@ public class TestProvider extends AndroidTestCase {
         TestUtilities.validateCursor("testInsertReadProvider. Error PokemonType", cursor, contentValues);
 
         ContentValues pokemonValues = TestUtilities.createPokemonValues(pokemonRowId);
-
         testContentObserver = TestUtilities.getTestContentObserver();
         mContext.getContentResolver().registerContentObserver(Pokemon.CONTENT_URI, true, testContentObserver);
 
@@ -221,6 +252,29 @@ public class TestProvider extends AndroidTestCase {
 
         TestUtilities.validateCursor("Error validating joined pokemon and pokemon type for a specific name",
                 pokemonCursor, pokemonValues);
+
+        ContentValues values = TestUtilities.createUserValues();
+        TestUtilities.TestContentObserver observer = TestUtilities.getTestContentObserver();
+        mContext.getContentResolver().registerContentObserver(Users.CONTENT_URI, true, observer);
+
+        Uri userUri = mContext.getContentResolver().insert(Users.CONTENT_URI, values);
+
+        testContentObserver.waitForNotificationOrFail();
+        mContext.getContentResolver().unregisterContentObserver(observer);
+
+        long userId = ContentUris.parseId(userUri);
+
+        assertTrue(userId != -1);
+
+        Cursor cur = mContext.getContentResolver().query(
+                Users.CONTENT_URI,
+                null,
+                null,
+                null,
+                null
+        );
+
+        TestUtilities.validateCursor("testInsertReadProvider. Error UserType", cur, values);
     }
 
     public void testUpdatePokemonType(){
@@ -266,6 +320,49 @@ public class TestProvider extends AndroidTestCase {
         cursor.close();
     }
 
+    public void testUpdateUser(){
+        ContentValues contentValues = TestUtilities.createUserValues();
+
+        Uri userUri = mContext.getContentResolver().insert(Users.CONTENT_URI, contentValues);
+        long userRowId = ContentUris.parseId(userUri);
+
+        assertTrue(userRowId != -1);
+        Log.e(LOG_TAG, "New user row id: "+userRowId);
+
+        ContentValues updatedValues = new ContentValues(contentValues);
+        updatedValues.put(Users._ID, userRowId);
+        updatedValues.put(Users.COLUMN_USERNAME, "Nichol");
+
+        Cursor pokemonCursor = mContext.getContentResolver().query(Users.CONTENT_URI, null, null, null, null);
+
+        TestUtilities.TestContentObserver testContentObserver = TestUtilities.getTestContentObserver();
+        pokemonCursor.registerContentObserver(testContentObserver);
+
+        int count = mContext.getContentResolver().update(
+                Users.CONTENT_URI, updatedValues, Users._ID + "= ?",
+                new String[] {Long.toString(userRowId)});
+
+        assertEquals(count, 1);
+
+        testContentObserver.waitForNotificationOrFail();
+        pokemonCursor.unregisterContentObserver(testContentObserver);
+        pokemonCursor.close();
+
+        Cursor cursor = mContext.getContentResolver().query(
+                Users.CONTENT_URI,
+                null,
+                Users._ID + " = " + userRowId,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+        TestUtilities.validateCurrentRecord("Error validating pokemon entry update",
+                cursor, updatedValues);
+
+        cursor.close();
+    }
+
     public void testDeleteRecords(){
         testInsertReadProvider();
 
@@ -275,12 +372,17 @@ public class TestProvider extends AndroidTestCase {
         TestUtilities.TestContentObserver pokemonObserver = TestUtilities.getTestContentObserver();
         mContext.getContentResolver().registerContentObserver(Pokemon.CONTENT_URI, true, pokemonObserver);
 
+        TestUtilities.TestContentObserver userObserver = TestUtilities.getTestContentObserver();
+        mContext.getContentResolver().registerContentObserver(Pokemon.CONTENT_URI, true, userObserver);
+
         deleteAllRecordsFromProvider();
 
         pokemonTypeObserver.waitForNotificationOrFail();
         pokemonObserver.waitForNotificationOrFail();
+        userObserver.waitForNotificationOrFail();
 
         mContext.getContentResolver().unregisterContentObserver(pokemonTypeObserver);
         mContext.getContentResolver().unregisterContentObserver(pokemonObserver);
+        mContext.getContentResolver().unregisterContentObserver(userObserver);
     }
 }

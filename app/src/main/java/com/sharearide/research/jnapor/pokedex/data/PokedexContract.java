@@ -17,7 +17,45 @@ public class PokedexContract {
 
     public static final String PATH_POKEMON = "pokemon";
 
+    public static final String PATH_USERS = "users";
 
+
+    public static final class Users implements BaseColumns{
+        public static final String TABLE_NAME = "users";
+
+        public static final String COLUMN_USERNAME = "username";
+
+        public static final String COLUMN_PASSWORD = "password";
+
+        public static final Uri CONTENT_URI = BASE_CONTENT_URI
+                .buildUpon().appendPath(PATH_USERS).build();
+
+        public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/"
+                +CONTENT_AUTHORITY + "/" + PATH_USERS;
+
+        public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/"
+                + CONTENT_AUTHORITY + "/" + PATH_USERS;
+
+        public static Uri buildUsersTypeFromUri(long id){
+            return ContentUris.withAppendedId(CONTENT_URI , id);
+        }
+
+        public static Uri buildUsersWithUserName(String username){
+            return CONTENT_URI.buildUpon().appendPath(username).build();
+        }
+
+        public static Uri buildUserLogin(String username, String password){
+            return CONTENT_URI.buildUpon().appendPath(username).appendPath(password).build();
+        }
+
+        public static String getUsernameFromUri(Uri uri){
+            return uri.getPathSegments().get(1);
+        }
+
+        public static String getPwordFromUri(Uri uri){
+            return uri.getPathSegments().get(2);
+        }
+    }
 
     public static final class PokemonType implements BaseColumns{
         public static final String TABLE_NAME = "pokemontype";

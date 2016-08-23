@@ -9,6 +9,8 @@ import android.test.AndroidTestCase;
 public class TestPokemonContract extends AndroidTestCase {
     private static final String TEST_POKEMON_POKETYPE = "/Grass";
     private static final String TEST_POKEMON_NAME = "Balbasaur";
+    private static final String TEST_USERNAME = "test";
+    private static final String TEST_PASSWORD = "test";
 
     public void testBuildPokemonAndType(){
         Uri pokemonAndtypeUri = PokedexContract.Pokemon.buildPokemonPokeType(TEST_POKEMON_POKETYPE);
@@ -20,5 +22,6 @@ public class TestPokemonContract extends AndroidTestCase {
 
         assertEquals("Error: Pokemon Type Uri doesn't match our expected result",
                 pokemonAndtypeUri.toString(), "content://com.sharearide.research.jnapor.pokedex/pokemon/%2FGrass");
+
     }
 }

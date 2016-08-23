@@ -26,6 +26,7 @@ public class TestDB extends AndroidTestCase{
 
         tableNameHashSet.add(PokedexContract.PokemonType.TABLE_NAME);
         tableNameHashSet.add(PokedexContract.Pokemon.TABLE_NAME);
+        tableNameHashSet.add(PokedexContract.Users.TABLE_NAME);
 
         mContext.deleteDatabase(PokemonDBHelper.DATABASE_NAME);
         SQLiteDatabase db = new PokemonDBHelper(this.mContext).getWritableDatabase();

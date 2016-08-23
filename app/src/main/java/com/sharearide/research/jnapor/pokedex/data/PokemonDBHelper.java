@@ -6,12 +6,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.sharearide.research.jnapor.pokedex.data.PokedexContract.Pokemon;
 import com.sharearide.research.jnapor.pokedex.data.PokedexContract.PokemonType;
+import com.sharearide.research.jnapor.pokedex.data.PokedexContract.Users;
 
 /**
  * Created by jnapor on 8/22/2016.
  */
 public class PokemonDBHelper extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     static final String DATABASE_NAME = "pokedex.db";
 
@@ -34,8 +35,13 @@ public class PokemonDBHelper extends SQLiteOpenHelper{
                 PokemonType._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 PokemonType.COLUMN_POKEMON_TYPE + " TEXT NOT NULL" + ")";
 
+        final String SQL_CREATE_USERS_TABLE = "CREATE TABLE " + Users.TABLE_NAME + " ( " +
+                Users._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                Users.COLUMN_USERNAME + " TEXT NOT NULL," + Users.COLUMN_PASSWORD +" TEXT NOT NULL)";
+
         sqLiteDatabase.execSQL(SQL_CREATE_POKEMON_TYPE_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_POKEMON_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_USERS_TABLE);
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {

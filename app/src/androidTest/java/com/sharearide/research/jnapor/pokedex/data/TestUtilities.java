@@ -21,6 +21,8 @@ import java.util.Set;
 public class TestUtilities extends AndroidTestCase{
     static String TEST_POKEMON = "Balbasaur";
     static String TEST_TYPE = "Grass";
+    static String TEST_USERNAME = "test";
+    static String TEST_PASSWORD = "test";
 
 
     static void validateCursor(String error, Cursor valueCursor, ContentValues expectedValues){
@@ -40,6 +42,14 @@ public class TestUtilities extends AndroidTestCase{
                     "' did not match the expected value '" +
                     expectedValue + "'. " + error, expectedValue, valueCursor.getString(idx));
         }
+    }
+
+    static ContentValues createUserValues(){
+        ContentValues user = new ContentValues();
+        user.put(PokedexContract.Users.COLUMN_USERNAME, TEST_USERNAME);
+        user.put(PokedexContract.Users.COLUMN_PASSWORD, TEST_PASSWORD);
+
+        return user;
     }
 
     static ContentValues createPokemonValues(long pokemonTypeId){
@@ -170,6 +180,28 @@ public class TestUtilities extends AndroidTestCase{
         assertTrue("Error: Failure to insert Grass Type Pokemon Value", locationRowId != -1);
 
         return locationRowId;
+    }
+
+    public void inserUser(){
+        PokemonDBHelper pokemonDBHelper = new PokemonDBHelper(mContext);
+        SQLiteDatabase sqLiteDatabase = pokemonDBHelper.getWritableDatabase();
+
+        ContentValues contentValues = TestUtilities.createUserValues();
+        long userId = sqLiteDatabase.insert(PokedexContract.Users.TABLE_NAME, null, contentValues);
+
+        Cursor c = sqLiteDatabase.query(
+                PokedexContract.Users.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        //Verify if successfully inserted
+        assertTrue("Error: Failure to insert Grass Type Pokemon Value", userId != -1);
+
     }
 
 }
