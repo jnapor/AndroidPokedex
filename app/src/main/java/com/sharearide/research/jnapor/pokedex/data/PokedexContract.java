@@ -59,8 +59,8 @@ public class PokedexContract {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
 
-        public static Uri builPokemonPokeType(String type){
-            return null;
+        public static Uri buildPokemonPokeType(String type){
+            return CONTENT_URI.buildUpon().appendPath(type).build();
         }
 
         public static Uri buildPokemonPokeTypeWithName(String type, String name){

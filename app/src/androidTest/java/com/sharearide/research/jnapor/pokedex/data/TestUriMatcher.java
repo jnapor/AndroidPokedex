@@ -14,7 +14,7 @@ public class TestUriMatcher extends AndroidTestCase{
     private static final Uri TEST_POKEMON_DIR = PokedexContract.Pokemon.CONTENT_URI;
 
     private static final Uri TEST_POKEMON_WITH_TYPE = PokedexContract.
-            Pokemon.builPokemonPokeType(POKEMON_TYPE);
+            Pokemon.buildPokemonPokeType(POKEMON_TYPE);
 
     private static final Uri TEST_POKEMON_WITH_TYPE_AND_NAME = PokedexContract.
             Pokemon.buildPokemonPokeTypeWithName(POKEMON_TYPE, POKEMON_NAME);
