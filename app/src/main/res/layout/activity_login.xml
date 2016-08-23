@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sharearide.research.jnapor.pokedex.LoginActivity">
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/logo" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/unamelbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/frame"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/uname" />
+
+    <EditText
+        android:id="@+id/unametxt"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/unamelbl"
+        android:layout_centerHorizontal="true"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/passlbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/unametxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/pword" />
+
+    <EditText
+        android:id="@+id/passtxt"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passlbl"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPassword"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/sign_in"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passtxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@color/sign_in"
+        android:text="@string/sign_in" />
+
+</RelativeLayout>

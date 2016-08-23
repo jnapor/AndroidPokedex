@@ -1,5 +1,6 @@
 package com.sharearide.research.jnapor.pokedex.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -48,6 +49,9 @@ public class PokemonDBHelper extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Pokemon.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PokemonType.TABLE_NAME);
         onCreate(sqLiteDatabase);
+    }
+
+    private void initializeDatabase(){
     }
 }
 
