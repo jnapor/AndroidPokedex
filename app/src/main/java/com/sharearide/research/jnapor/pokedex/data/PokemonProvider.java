@@ -188,13 +188,58 @@ public class PokemonProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(Uri uri, String s, String[] strings) {
-        return 0;
+    public int delete(Uri uri, String selection, String[] args) {
+        final SQLiteDatabase sqLiteDatabase = mPokedexHelper.getWritableDatabase();
+        final int match = mUriMatcher.match(uri);
+        int rowsDeleted;
+
+        if(selection == null){
+            selection = "1";
+        }
+
+        switch (match){
+            case POKEMON :
+                rowsDeleted = sqLiteDatabase.delete(
+                        PokedexContract.Pokemon.TABLE_NAME, selection , args
+                );
+                break;
+            case POKEMON_TYPE:
+                rowsDeleted = sqLiteDatabase.delete(
+                        PokedexContract.PokemonType.TABLE_NAME, selection , args
+                );
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: "+ uri);
+        }
+        if (rowsDeleted != 0){
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowsDeleted;
     }
 
     @Override
-    public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
-        return 0;
+    public int update(Uri uri, ContentValues contentValues, String selection, String[] args) {
+        final SQLiteDatabase sqLiteDatabase = mPokedexHelper.getWritableDatabase();
+        final int match = mUriMatcher.match(uri);
+        int rowsUpdated;
+
+        switch (match){
+            case POKEMON:
+                rowsUpdated = sqLiteDatabase.update(PokedexContract.Pokemon.TABLE_NAME,
+                        contentValues, selection, args);
+                break;
+            case POKEMON_TYPE:
+                rowsUpdated = sqLiteDatabase.update(PokedexContract.PokemonType.TABLE_NAME,
+                        contentValues, selection, args);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: "+ uri);
+        }
+        if(rowsUpdated != 0){
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsUpdated;
     }
 
     @Override

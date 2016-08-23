@@ -1,15 +1,12 @@
 package com.sharearide.research.jnapor.pokedex.data;
 
 import android.content.ComponentName;
-import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.UriMatcher;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 import com.sharearide.research.jnapor.pokedex.data.PokedexContract.Pokemon;
@@ -68,7 +65,7 @@ public class TestProvider extends AndroidTestCase {
     }
 
     public void deleteAllRecords(){
-        deleteAllRecordsFromDB();
+        deleteAllRecordsFromProvider();
     }
 
     @Override
@@ -224,5 +221,66 @@ public class TestProvider extends AndroidTestCase {
 
         TestUtilities.validateCursor("Error validating joined pokemon and pokemon type for a specific name",
                 pokemonCursor, pokemonValues);
+    }
+
+    public void testUpdatePokemonType(){
+        ContentValues contentValues = TestUtilities.createGrassTypePokemonTypeValues();
+
+        Uri pokemonTypeUri = mContext.getContentResolver().insert(PokemonType.CONTENT_URI, contentValues);
+        long pokemonRowId = ContentUris.parseId(pokemonTypeUri);
+
+        assertTrue(pokemonRowId != -1);
+        Log.e(LOG_TAG, "New row id: "+pokemonRowId);
+
+        ContentValues updatedValues = new ContentValues(contentValues);
+        updatedValues.put(PokemonType._ID, pokemonRowId);
+        updatedValues.put(PokemonType.COLUMN_POKEMON_TYPE, "Poison");
+
+        Cursor pokemonCursor = mContext.getContentResolver().query(PokemonType.CONTENT_URI, null, null, null, null);
+
+        TestUtilities.TestContentObserver testContentObserver = TestUtilities.getTestContentObserver();
+        pokemonCursor.registerContentObserver(testContentObserver);
+
+        int count = mContext.getContentResolver().update(
+                PokemonType.CONTENT_URI, updatedValues, PokemonType._ID + "= ?",
+                new String[] {Long.toString(pokemonRowId)});
+
+        assertEquals(count, 1);
+
+        testContentObserver.waitForNotificationOrFail();
+        pokemonCursor.unregisterContentObserver(testContentObserver);
+        pokemonCursor.close();
+
+        Cursor cursor = mContext.getContentResolver().query(
+                PokemonType.CONTENT_URI,
+                null,
+                PokemonType._ID + " = " + pokemonRowId,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+        TestUtilities.validateCurrentRecord("Error validating pokemon entry update",
+                cursor, updatedValues);
+
+        cursor.close();
+    }
+
+    public void testDeleteRecords(){
+        testInsertReadProvider();
+
+        TestUtilities.TestContentObserver pokemonTypeObserver = TestUtilities.getTestContentObserver();
+        mContext.getContentResolver().registerContentObserver(PokemonType.CONTENT_URI, true, pokemonTypeObserver);
+
+        TestUtilities.TestContentObserver pokemonObserver = TestUtilities.getTestContentObserver();
+        mContext.getContentResolver().registerContentObserver(Pokemon.CONTENT_URI, true, pokemonObserver);
+
+        deleteAllRecordsFromProvider();
+
+        pokemonTypeObserver.waitForNotificationOrFail();
+        pokemonObserver.waitForNotificationOrFail();
+
+        mContext.getContentResolver().unregisterContentObserver(pokemonTypeObserver);
+        mContext.getContentResolver().unregisterContentObserver(pokemonObserver);
     }
 }
