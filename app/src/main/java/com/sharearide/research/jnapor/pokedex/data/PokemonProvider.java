@@ -12,7 +12,7 @@ import android.net.Uri;
  * Created by jnapor on 8/23/2016.
  */
 public class PokemonProvider extends ContentProvider {
-    private static final UriMatcher mUriMatcher = buildUrMatcher();
+    private static final UriMatcher mUriMatcher = buildUriMatcher();
     private PokemonDBHelper mPokedexHelper;
 
     static final int POKEMON = 100;
@@ -72,8 +72,16 @@ public class PokemonProvider extends ContentProvider {
         );
     }
 
-    static UriMatcher buildUrMatcher(){
-        return null;
+    static UriMatcher buildUriMatcher(){
+        final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        final String authority = PokedexContract.CONTENT_AUTHORITY;
+
+        uriMatcher.addURI(authority, PokedexContract.PATH_POKEMON, POKEMON);
+        uriMatcher.addURI(authority, PokedexContract.PATH_POKEMON + "/*", POKEMON_WITH_TYPE);
+        uriMatcher.addURI(authority, PokedexContract.PATH_POKEMON + "/*/*", POKEMON_WITH_TYPE_AND_NAME);
+        uriMatcher.addURI(authority, PokedexContract.PATH_POKEMONTYPE, POKEMON_TYPE);
+
+        return uriMatcher;
     }
 
 

@@ -1,5 +1,6 @@
 package com.sharearide.research.jnapor.pokedex.data;
 
+import android.content.UriMatcher;
 import android.net.Uri;
 import android.test.AndroidTestCase;
 
@@ -20,4 +21,20 @@ public class TestUriMatcher extends AndroidTestCase{
             Pokemon.buildPokemonPokeTypeWithName(POKEMON_TYPE, POKEMON_NAME);
 
     private static final Uri TEST_POKEMONTYPE_DIR = PokedexContract.PokemonType.CONTENT_URI;
+
+    public void testUriMatcher(){
+        UriMatcher uriMatcher = PokemonProvider.buildUriMatcher();
+
+        assertEquals("Error: The POKEMON URI was matched incorrectly.",
+                uriMatcher.match(TEST_POKEMON_DIR), PokemonProvider.POKEMON);
+
+        assertEquals("Error: The POKEMON WITH POKEMON TYPE URI was matched incorrectly.",
+                uriMatcher.match(TEST_POKEMON_WITH_TYPE), PokemonProvider.POKEMON_WITH_TYPE);
+
+        assertEquals("Error: The POKEMON WITH POKEMON TYPE AND NAME URI was matched incorrectly",
+                uriMatcher.match(TEST_POKEMON_WITH_TYPE_AND_NAME), PokemonProvider.POKEMON_WITH_TYPE_AND_NAME);
+
+        assertEquals("Error: The POKEMON TYPE URI was matched incorrectly",
+                uriMatcher.match(TEST_POKEMONTYPE_DIR), PokemonProvider.POKEMON_TYPE);
+    }
 }
