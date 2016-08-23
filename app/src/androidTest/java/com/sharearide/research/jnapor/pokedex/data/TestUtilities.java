@@ -22,7 +22,7 @@ public class TestUtilities extends AndroidTestCase{
 
     static void validateCursor(String error, Cursor valueCursor, ContentValues expectedValues){
         assertTrue("Empty cursor returned" + error, valueCursor.moveToFirst());
-        validateCursor(error, valueCursor, expectedValues);
+        validateCurrentRecord(error, valueCursor, expectedValues);
         valueCursor.close();
     }
 
@@ -46,6 +46,28 @@ public class TestUtilities extends AndroidTestCase{
         pokemon.put(PokedexContract.Pokemon.COLUMN_POKEMON_DESC,"Seed Pokemon");
 
         return pokemon;
+    }
+
+    static ContentValues createGrassTypePokemonTypeValues(){
+        ContentValues testValues = new ContentValues();
+        testValues.put(PokedexContract.PokemonType.COLUMN_POKEMON_TYPE, "Grass");
+
+        return testValues;
+    }
+
+    static long insertPokemonTypeGrass(Context mContext){
+        PokemonDBHelper pokemonDBHelper = new PokemonDBHelper(mContext);
+        SQLiteDatabase sqLiteDatabase = pokemonDBHelper.getWritableDatabase();
+        ContentValues testValues = TestUtilities.createGrassTypePokemonTypeValues();
+
+        long locationRowId;
+        locationRowId = sqLiteDatabase.insert(PokedexContract.PokemonType.TABLE_NAME, null, testValues);
+
+
+        //Verify if successfully inserted
+        assertTrue("Error: Failure to insert Grass Type Pokemon Value", locationRowId != -1);
+
+        return locationRowId;
     }
 
     static class TestContentObserver extends ContentObserver {
@@ -91,13 +113,6 @@ public class TestUtilities extends AndroidTestCase{
 
     static TestContentObserver getTestContentObserver() {
         return TestContentObserver.getTestContentObserver();
-    }
-
-    static ContentValues createGrassTypePokemonTypeValues(){
-        ContentValues testValues = new ContentValues();
-        testValues.put(PokedexContract.PokemonType.COLUMN_POKEMON_TYPE, "Grass");
-
-        return testValues;
     }
 
     public void insertGrassTypePokemonTypeValues(Context context){
@@ -153,4 +168,5 @@ public class TestUtilities extends AndroidTestCase{
 
         return locationRowId;
     }
+
 }

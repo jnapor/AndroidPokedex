@@ -105,11 +105,27 @@ public class PokemonProvider extends ContentProvider {
                 break;
             }
             case POKEMON:{
-                retCursor = null;
+                retCursor = mPokedexHelper.getReadableDatabase().query(
+                        PokedexContract.Pokemon.TABLE_NAME,
+                        projection,
+                        selection,
+                        args,
+                        null,
+                        null,
+                        order
+                );
                 break;
             }
             case POKEMON_TYPE:{
-                retCursor = null;
+                retCursor = mPokedexHelper.getReadableDatabase().query(
+                        PokedexContract.PokemonType.TABLE_NAME,
+                        projection,
+                        selection,
+                        args,
+                        null,
+                        null,
+                        order
+                );
                 break;
             }
             default:
@@ -125,8 +141,10 @@ public class PokemonProvider extends ContentProvider {
         final int match = mUriMatcher.match(uri);
 
         switch (match){
-//            case POKEMON_WITH_TYPE_AND_NAME :
-//            case POKEMON_WITH_TYPE :
+            case POKEMON_WITH_TYPE_AND_NAME :
+                return PokedexContract.Pokemon.CONTENT_ITEM_TYPE;
+            case POKEMON_WITH_TYPE :
+                return PokedexContract.Pokemon.CONTENT_TYPE;
             case POKEMON:
                 return PokedexContract.Pokemon.CONTENT_TYPE;
             case POKEMON_TYPE:
