@@ -36,6 +36,7 @@ public class PokemonDBHelper extends SQLiteOpenHelper{
 
         sqLiteDatabase.execSQL(SQL_CREATE_POKEMON_TYPE_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_POKEMON_TABLE);
+
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
@@ -43,5 +44,7 @@ public class PokemonDBHelper extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PokemonType.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
+
+
 }
 

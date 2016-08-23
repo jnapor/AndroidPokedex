@@ -246,7 +246,6 @@ public class PokemonProvider extends ContentProvider {
     public int bulkInsert(Uri uri, ContentValues[] values) {
         final SQLiteDatabase sqLiteDatabase = mPokedexHelper.getWritableDatabase();
         final int match = mUriMatcher.match(uri);
-        Uri retUri;
         int count = 0;
         switch (match) {
             case POKEMON:{
