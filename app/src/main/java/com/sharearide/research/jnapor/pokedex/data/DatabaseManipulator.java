@@ -13,8 +13,6 @@ import com.sharearide.research.jnapor.pokedex.data.PokedexContract.*;
  */
 public class DatabaseManipulator {
     private static final String LOG_TAG = DatabaseManipulator.class.getSimpleName();
-    private static int NORMAL, FIRE, WATER, ELECTRIC, GRASS, ICE, FIGHTING, POISON, GROUND,
-                        FLYING, PSYCHIC, BUG, ROCK, GHOST, DRAGON, DARK, STEEL;
 
     public static int login(Context context, String loginusername, String loginpassword){
         Cursor cursor = context.getContentResolver().query(
@@ -91,7 +89,6 @@ public class DatabaseManipulator {
             for (int count = 0; count < 17; count++){
                 long pokemonTypeId = insertPokemonType(context, pokemonTypeValues[count]);
                 insertPokemonByType(context,pokemonTypeId);
-
             }
         }else{
             Log.e(LOG_TAG, "POKEMONTYPE TABLE IS ALREADY POPULATED");
@@ -222,6 +219,12 @@ public class DatabaseManipulator {
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Toxic Mouth Pokemon");
         }
+
+        int count = context.getContentResolver().bulkInsert(Pokemon.CONTENT_URI, contentValues);
+
+        if(count < 0){
+            Log.e(LOG_TAG, "Error in bulk insertion");
+        }
     }
 
     public static long insertUser(Context context, ContentValues contentValues){
@@ -240,6 +243,11 @@ public class DatabaseManipulator {
         return cursor;
     }
 
+    public static Cursor getPokemonList(Context context){
+        Cursor cursor = context.getContentResolver().query(Pokemon.CONTENT_URI, null, null, null ,null);
+
+        return cursor;
+    }
 
     public static long insertPokemonType(Context context, ContentValues contentValues){
         Uri insertUri = context.getContentResolver().insert(PokemonType.CONTENT_URI, contentValues);
@@ -256,4 +264,5 @@ public class DatabaseManipulator {
 
         return retVal;
     }
+
 }
