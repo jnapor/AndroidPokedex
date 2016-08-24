@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.sharearide.research.jnapor.pokedex.data.PokedexContract.Pokemon;
 import com.sharearide.research.jnapor.pokedex.data.PokedexContract.PokemonType;
@@ -13,7 +14,7 @@ import com.sharearide.research.jnapor.pokedex.data.PokedexContract.Users;
  * Created by jnapor on 8/22/2016.
  */
 public class PokemonDBHelper extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     static final String DATABASE_NAME = "pokedex.db";
 
@@ -46,12 +47,11 @@ public class PokemonDBHelper extends SQLiteOpenHelper{
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        Log.e("DBHelper: ", "Creating New Database Version");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Pokemon.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PokemonType.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
-    private void initializeDatabase(){
-    }
 }
 

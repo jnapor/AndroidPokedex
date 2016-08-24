@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
         DatabaseManipulator.initializeDatabase(this);
 
+
         Button button = (Button) findViewById(R.id.sign_in);
         final EditText username = (EditText) findViewById(R.id.unametxt);
         final EditText password = (EditText) findViewById(R.id.passtxt);
