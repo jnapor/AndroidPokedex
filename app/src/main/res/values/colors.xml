@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="sign_in">#666699</color>
+    <color name="background">#FFF7DA</color>
+    <color name="textView">#FD971C</color>
 </resources>

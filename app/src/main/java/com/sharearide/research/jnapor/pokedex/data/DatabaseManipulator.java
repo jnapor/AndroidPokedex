@@ -23,7 +23,10 @@ public class DatabaseManipulator {
                 null
         );
 
-        return cursor.getCount();
+        int val =  cursor.getCount();
+        cursor.close();
+        return val;
+
     }
 
     public static void initializeDatabase(Context context){
@@ -41,12 +44,6 @@ public class DatabaseManipulator {
                 null
         );
 
-        Cursor pokemonCursor = context.getContentResolver().query(Pokemon.CONTENT_URI,
-                null,
-                null,
-                null,
-                null
-        );
 
         if(usersCursor.getCount() <= 0){
             ContentValues userValues = new ContentValues();
@@ -93,6 +90,9 @@ public class DatabaseManipulator {
         }else{
             Log.e(LOG_TAG, "POKEMONTYPE TABLE IS ALREADY POPULATED");
         }
+
+        usersCursor.close();
+        pokemonTypeCursor.close();
     }
 
     private static void insertPokemonByType(Context context, long pokemonTypeId) {

@@ -14,7 +14,7 @@ import com.sharearide.research.jnapor.pokedex.data.PokedexContract.Users;
  * Created by jnapor on 8/22/2016.
  */
 public class PokemonDBHelper extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 8;
 
     static final String DATABASE_NAME = "pokedex.db";
 
