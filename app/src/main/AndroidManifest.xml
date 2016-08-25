@@ -21,7 +21,8 @@
             android:authorities="com.sharearide.research.jnapor.pokedex" />
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".PokemonTypeList"></activity>
+        <activity android:name=".PokemonTypeList" />
+        <activity android:name=".PokemonInfoActivity"/>
     </application>
 
 </manifest>

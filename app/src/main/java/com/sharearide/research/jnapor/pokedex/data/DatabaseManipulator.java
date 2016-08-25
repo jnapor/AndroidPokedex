@@ -104,121 +104,223 @@ public class DatabaseManipulator {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Jigglypuff");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Balloon Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.51");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"5.5");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Friend Guard");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Ratata");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Mouse Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.19");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"0.30");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Hustle");
         } else if (pokemonTypeId == 2) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Charizard");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Flame Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.70");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"90.5");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Solar Power");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Delphox");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Fox Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.5");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"39.0");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Magician");
         } else if (pokemonTypeId == 3) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Squirtle");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Turtle Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.07");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"0.51");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Rain Dish");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Corphish");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
-            contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Crustacean Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Ruffian Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.61");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"11.5");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Adaptability");
         } else if (pokemonTypeId == 4) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Pikachu");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Mouse Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.41");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"6.0");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Lightning Rod");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Manectric");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Dog Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.5");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"40.2");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Minus");
         } else if (pokemonTypeId == 5) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Leafeon");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Verdant Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.99");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"25.5");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Chlorophyll");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Celebi");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Time Travel Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.61");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"5.0");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Natural Cure");
         } else if (pokemonTypeId == 6) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Snorunt");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Snow hat Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.71");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"16.8");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Moody");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Delibird");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Delivery Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.89");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"16.0");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Insomnia");
         } else if (pokemonTypeId == 7) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Hitmonchan");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Punching Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.40");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"50.2");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Inner Focus");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Snorlax");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Sleeping Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"2.11");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"460.0");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Gluttony");
         } else if (pokemonTypeId == 8) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Steelix");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Iron Snake Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"9.19");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"400.0");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Sheer Force");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Wooper");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Water Fish Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.41");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"8.5");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Unaware");
         }  else if (pokemonTypeId == 9) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Pidgeot");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Bird Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.50");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"39.5");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Big Pecks");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Lugia");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Diving Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"5.21");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"216.");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Multiscale");
         }  else if (pokemonTypeId == 10) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Alakazam");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Psi Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.50");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"48.0");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Magic Guard");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Mew");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "New Species Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.41");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"4.0");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Synchronize");
         } else if (pokemonTypeId == 11) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Beedrill");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Poison Bee Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.99");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"29.5");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Sniper");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Ninjask");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Ninja Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.79");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"12.0");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Infiltrator");
         } else if (pokemonTypeId == 12) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Onix");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Rock Snake Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"8.79");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"210.0");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Weak Armor");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Golem");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Megaton Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.40");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"300.0");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Sand Veil");
         } else if (pokemonTypeId == 13) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Gastly");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Gas Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.30");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"0.1");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Levitate");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Giratina");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Renegade Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"4.50");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"750.0");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Telepathy");
         } else if (pokemonTypeId == 14) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Dragonite");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Dragon Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"2.21");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"210.0");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Multiscale");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Rayquaza");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Sky High Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"7.01");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"206.5");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Air Lock");
         } else if (pokemonTypeId == 15) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Darkrai");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Pitch Black Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.50");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"50.5");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Bad dreams");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Weavile");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Sharp Claw Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.09");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"34.0");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"PickPocket");
         } else if (pokemonTypeId == 16) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Lairon");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Iron Armor Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"0.89");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"120.0");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Heavy Metal");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Registeel");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Iron Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.91");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"205.5");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Light Metal");
         } else if (pokemonTypeId == 17) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Dragalge");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Mock Kelp Pokemon");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.80");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_WEIGHT,"81.5");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_ABILITY,"Adaptability");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Toxicroak");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Toxic Mouth Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_HEIGHT,"1.30");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_WEIGHT,"44.4");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_ABILITY,"Poison Touch");
         }
 
         int count = context.getContentResolver().bulkInsert(Pokemon.CONTENT_URI, contentValues);
@@ -258,6 +360,16 @@ public class DatabaseManipulator {
                 null
                 );
 
+        return cursor;
+    }
+
+    public static Cursor getPokemonById(Context context, int id){
+        Cursor cursor = context.getContentResolver().query(Pokemon.CONTENT_URI,
+                null,
+                Pokemon._ID + " = ?",
+                new String[]{String.valueOf(id)},
+                null
+        );
         return cursor;
     }
 

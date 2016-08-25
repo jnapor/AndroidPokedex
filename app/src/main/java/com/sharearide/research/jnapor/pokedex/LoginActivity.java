@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.sharearide.research.jnapor.pokedex.data.DatabaseManipulator;
@@ -26,8 +27,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Button button = (Button) findViewById(R.id.sign_in);
-        final EditText username = (EditText) findViewById(R.id.unametxt);
-        final EditText password = (EditText) findViewById(R.id.passtxt);
+        RelativeLayout parentLayout = (RelativeLayout) findViewById(R.id.loginLayout);
+
+        final EditText username = (EditText) parentLayout.findViewById(R.id.unametxt);
+        final EditText password = (EditText) parentLayout.findViewById(R.id.passtxt);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

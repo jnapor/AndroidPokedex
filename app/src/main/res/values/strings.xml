@@ -3,4 +3,9 @@
     <string name="uname">Username</string>
     <string name="pword">Password</string>
     <string name="sign_in">Sign in</string>
+    <string name="name">Name:</string>
+    <string name="specie">Specie:</string>
+    <string name="height">Height:</string>
+    <string name="weight">Weight:</string>
+    <string name="ability">Ability:</string>
 </resources>

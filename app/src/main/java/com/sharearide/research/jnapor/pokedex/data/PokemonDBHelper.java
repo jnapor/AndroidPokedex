@@ -14,7 +14,7 @@ import com.sharearide.research.jnapor.pokedex.data.PokedexContract.Users;
  * Created by jnapor on 8/22/2016.
  */
 public class PokemonDBHelper extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 12;
 
     static final String DATABASE_NAME = "pokedex.db";
 
@@ -30,6 +30,9 @@ public class PokemonDBHelper extends SQLiteOpenHelper{
                 Pokemon.COLUMN_POKEMON_NAME + " TEXT NOT NULL, " +
                 Pokemon.COLUMN_POKEMON_TYPE_ID + " TEXT NOT NULL, " +
                 Pokemon.COLUMN_POKEMON_DESC + " TEXT NOT NULL, " +
+                Pokemon.COLUMN_POKEMON_HEIGHT + " TEXT NOT NULL, " +
+                Pokemon.COLUMN_POKEMON_WEIGHT + " TEXT NOT NULL, " +
+                Pokemon.COLUMN_POKEMON_ABILITY + " TEXT NOT NULL, " +
                 " FOREIGN KEY (" + Pokemon.COLUMN_POKEMON_TYPE_ID + ") REFERENCES " +
                 PokemonType.TABLE_NAME + " (" + PokemonType._ID + "))";
 

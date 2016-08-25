@@ -87,6 +87,11 @@ public class PokedexContract {
 
         public static final String COLUMN_POKEMON_DESC = "pokemon_desc";
 
+        public static final String COLUMN_POKEMON_HEIGHT = "pokemon_height";
+
+        public static final String COLUMN_POKEMON_WEIGHT = "pokemon_weight";
+
+        public static final String COLUMN_POKEMON_ABILITY = "ability";
 
         public static final Uri CONTENT_URI = BASE_CONTENT_URI
                 .buildUpon().appendPath(PATH_POKEMON).build();
