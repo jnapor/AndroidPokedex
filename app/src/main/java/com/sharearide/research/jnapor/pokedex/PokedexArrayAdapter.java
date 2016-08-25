@@ -31,10 +31,14 @@ public class PokedexArrayAdapter extends ArrayAdapter<PokedexUtilityModel> {
 
         TextView textView = (TextView) listView.findViewById(R.id.pokemon_types_label);
         textView.setText(model.getPokedexUtilityWord());
+
+        textView.setBackgroundResource(model.getPokedexUtilityResourceColorId());
+
         ImageView imageView = (ImageView) listView.findViewById(R.id.pokemon_types);
         imageView.setImageResource(model.getPokedexUtilityResourceImageId());
 
         return listView;
     }
-
 }
+
+

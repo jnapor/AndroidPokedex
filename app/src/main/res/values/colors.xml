@@ -6,4 +6,22 @@
     <color name="sign_in">#666699</color>
     <color name="background">#FFF7DA</color>
     <color name="textView">#FD971C</color>
+
+    <color name="bug">#28742C</color>
+    <color name="dark">#2A3E5F</color>
+    <color name="normal">#a0a0a0</color>
+    <color name="dragon">#fec760</color>
+    <color name="fighting">#a73f00</color>
+    <color name="fire">#c40001</color>
+    <color name="flying">#4cc5e2</color>
+    <color name="ghost">#9b94c7</color>
+    <color name="ground">#9d6630</color>
+    <color name="ice">#5ae7f9</color>
+    <color name="grass">#9afc45</color>
+    <color name="electric">#feeb0b</color>
+    <color name="poison">#784862</color>
+    <color name="psychic">#7000BE</color>
+    <color name="rock">#6B6157</color>
+    <color name="steel">#6E7F86</color>
+    <color name="water">#004BC2</color>
 </resources>

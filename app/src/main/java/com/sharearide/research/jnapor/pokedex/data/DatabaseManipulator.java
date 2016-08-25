@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
+import com.sharearide.research.jnapor.pokedex.R;
 import com.sharearide.research.jnapor.pokedex.data.PokedexContract.*;
 /**
  * Created by jnapor on 8/24/2016.
@@ -128,12 +129,12 @@ public class DatabaseManipulator {
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
             contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Dog Pokemon");
         } else if (pokemonTypeId == 5) {
-            contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Jigglypuff");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Leafeon");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
-            contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Balloon Pokemon");
-            contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Ratata");
+            contentValues[0].put(Pokemon.COLUMN_POKEMON_DESC, "Verdant Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_NAME, "Celebi");
             contentValues[1].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
-            contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Mouse Pokemon");
+            contentValues[1].put(Pokemon.COLUMN_POKEMON_DESC, "Time Travel Pokemon");
         } else if (pokemonTypeId == 6) {
             contentValues[0].put(Pokemon.COLUMN_POKEMON_NAME, "Snorunt");
             contentValues[0].put(Pokemon.COLUMN_POKEMON_TYPE_ID, pokemonTypeId);
@@ -249,6 +250,17 @@ public class DatabaseManipulator {
         return cursor;
     }
 
+    public static Cursor getPokemonListByType(Context context, int type){
+        Cursor cursor = context.getContentResolver().query(Pokemon.CONTENT_URI,
+                null,
+                Pokemon.COLUMN_POKEMON_TYPE_ID + " = ?",
+                new String[]{String.valueOf(type)},
+                null
+                );
+
+        return cursor;
+    }
+
     public static long insertPokemonType(Context context, ContentValues contentValues){
         Uri insertUri = context.getContentResolver().insert(PokemonType.CONTENT_URI, contentValues);
 
@@ -261,6 +273,163 @@ public class DatabaseManipulator {
         Uri insertUri = context.getContentResolver().insert(Pokemon.CONTENT_URI, contentValues);
 
         long retVal = ContentUris.parseId(insertUri);
+
+        return retVal;
+    }
+
+    public static int getImageFromPokemonTypeId(int id){
+        int retVal = 0;
+        if (id == 1) {
+            retVal = R.drawable.normal_400px;
+        } else if (id == 2){
+            retVal = R.drawable.fire_400px;
+        } else if (id == 3){
+            retVal = R.drawable.water_400px;
+        } else if (id == 4){
+            retVal = R.drawable.lightning_400px;
+        } else if (id == 5){
+            retVal = R.drawable.leaf_400px;
+        } else if (id == 6){
+            retVal = R.drawable.ice_400px;
+        } else if (id == 7){
+            retVal = R.drawable.fightingl_400px;
+        } else if (id == 8){
+            retVal = R.drawable.ground_400px;
+        } else if (id == 9){
+            retVal = R.drawable.flying_400px;
+        } else if (id == 10){
+            retVal = R.drawable.psychic_400px;
+        } else if (id == 11){
+            retVal = R.drawable.bug_400px;
+        } else if (id == 12){
+            retVal = R.drawable.rock_400px;
+        } else if (id == 13){
+            retVal = R.drawable.ghost_400px;
+        } else if (id == 14){
+            retVal = R.drawable.dragon_400px;
+        } else if (id == 15){
+            retVal = R.drawable.dark_400px;
+        } else if (id == 16){
+            retVal = R.drawable.steel_400px;
+        } else if (id == 17){
+            retVal = R.drawable.poison_400px;
+        }
+
+        return retVal;
+    }
+
+    public static int getColorFromPokemonTypeId(int id){
+        int retVal = 0;
+        if (id == 1) {
+            retVal = R.color.normal;
+        } else if (id == 2){
+            retVal = R.color.fire;
+        } else if (id == 3){
+            retVal = R.color.water;
+        } else if (id == 4){
+            retVal = R.color.electric;
+        } else if (id == 5){
+            retVal = R.color.grass;
+        } else if (id == 6){
+            retVal = R.color.ice;
+        } else if (id == 7){
+            retVal = R.color.fighting;
+        } else if (id == 8){
+            retVal = R.color.ground;
+        } else if (id == 9){
+            retVal = R.color.flying;
+        } else if (id == 10){
+            retVal = R.color.psychic;
+        } else if (id == 11){
+            retVal = R.color.bug;
+        } else if (id == 12){
+            retVal = R.color.rock;
+        } else if (id == 13){
+            retVal = R.color.ghost;
+        } else if (id == 14){
+            retVal = R.color.dragon;
+        } else if (id == 15){
+            retVal = R.color.dark;
+        } else if (id == 16){
+            retVal = R.color.steel;
+        } else if (id == 17){
+            retVal = R.color.poison;
+        }
+        return retVal;
+    }
+
+    public static int getImageFromPokemonId(int id){
+        int retVal = 0;
+        if (id == 1) {
+            retVal = R.drawable.jigglypuff;
+        } else if (id == 2){
+            retVal = R.drawable.rattata;
+        } else if (id == 3){
+            retVal = R.drawable.charizard;
+        } else if (id == 4){
+            retVal = R.drawable.delphox;
+        } else if (id == 5){
+            retVal = R.drawable.squirtle;
+        } else if (id == 6){
+            retVal = R.drawable.corphish;
+        } else if (id == 7){
+            retVal = R.drawable.pikachu;
+        } else if (id == 8){
+            retVal = R.drawable.manectric;
+        } else if (id == 9){
+            retVal = R.drawable.leafeon;
+        } else if (id == 10){
+            retVal = R.drawable.celebi;
+        } else if (id == 11){
+            retVal = R.drawable.snorunt;
+        } else if (id == 12){
+            retVal = R.drawable.delibird;
+        } else if (id == 13){
+            retVal = R.drawable.hitmonchan;
+        } else if (id == 14){
+            retVal = R.drawable.snorlax;
+        } else if (id == 15){
+            retVal = R.drawable.steelix;
+        } else if (id == 16){
+            retVal = R.drawable.wooper;
+        } else if (id == 17){
+            retVal = R.drawable.pidgeot;
+        } else if (id == 18){
+            retVal = R.drawable.lugia;
+        } else if (id == 19){
+            retVal = R.drawable.alakazam;
+        } else if (id == 20){
+            retVal = R.drawable.mew;
+        } else if (id == 21){
+            retVal = R.drawable.beedrill;
+        } else if (id == 22){
+            retVal = R.drawable.ninjask;
+        } else if (id == 23){
+            retVal = R.drawable.onix;
+        } else if (id == 24){
+            retVal = R.drawable.golem;
+        } else if (id == 25){
+            retVal = R.drawable.gastly;
+        } else if (id == 26){
+            retVal = R.drawable.giratina;
+        } else if (id == 27){
+            retVal = R.drawable.dragonite;
+        } else if (id == 28){
+            retVal = R.drawable.rayquaza;
+        } else if (id == 29){
+            retVal = R.drawable.darkrai;
+        } else if (id == 30){
+            retVal = R.drawable.weavile;
+        } else if (id == 31){
+            retVal = R.drawable.lairon;
+        } else if (id == 32){
+            retVal = R.drawable.registeel;
+        } else if (id == 33){
+            retVal = R.drawable.dragalge;
+        }else if (id == 34){
+            retVal = R.drawable.toxicroak;
+        }
+
 
         return retVal;
     }

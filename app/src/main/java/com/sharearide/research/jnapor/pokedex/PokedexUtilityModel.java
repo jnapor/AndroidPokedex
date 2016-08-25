@@ -6,10 +6,12 @@ package com.sharearide.research.jnapor.pokedex;
 public class PokedexUtilityModel {
     private String pokedexUtilityWord;
     private int pokedexUtilityResourceImageId;
+    private int pokedexUtilityResourceColorId;
 
-    public PokedexUtilityModel(String pokedexUtilityWord, int pokedexUtilityResourceImageId){
+    public PokedexUtilityModel(String pokedexUtilityWord, int pokedexUtilityResourceImageId, int pokedexUtilityResourceColorId){
         this.pokedexUtilityWord = pokedexUtilityWord;
         this.pokedexUtilityResourceImageId = pokedexUtilityResourceImageId;
+        this.pokedexUtilityResourceColorId = pokedexUtilityResourceColorId;
     }
 
     public String getPokedexUtilityWord() {
@@ -18,5 +20,9 @@ public class PokedexUtilityModel {
 
     public int getPokedexUtilityResourceImageId() {
         return pokedexUtilityResourceImageId;
+    }
+
+    public int getPokedexUtilityResourceColorId(){
+        return pokedexUtilityResourceColorId;
     }
 }
