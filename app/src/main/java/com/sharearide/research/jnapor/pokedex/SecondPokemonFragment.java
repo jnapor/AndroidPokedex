@@ -38,8 +38,6 @@ public class SecondPokemonFragment extends Fragment {
         Cursor cursor = DatabaseManipulator.getPokemonById(getActivity(), id);
 
         if(cursor.moveToFirst()){
-            Log.e("SECOND FRAGMENT", String.valueOf(cursor.getInt(cursor.getColumnIndex("_id")))
-                    +cursor.getString(cursor.getColumnIndex("pokemon_name")));
 
             int pokemonId = cursor.getInt(cursor.getColumnIndex("_id"));
             int imageResourceId = DatabaseManipulator.getImageFromPokemonId(pokemonId);
@@ -86,6 +84,7 @@ public class SecondPokemonFragment extends Fragment {
             Log.e("SECOND FRAGMENT", "CURSOR IS EMPTY");
         }
 
+        cursor.close();
         return rootView;
     }
 }

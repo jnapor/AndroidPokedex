@@ -21,7 +21,6 @@
             android:authorities="com.sharearide.research.jnapor.pokedex" />
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".PokemonInfoActivity" />
         <activity
             android:name=".ViewPagerActivity"
             android:label="@string/pokemon"
