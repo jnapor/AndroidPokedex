@@ -22,9 +22,7 @@ public class PokemonTypeList extends AppCompatActivity {
 
         Intent intent = getIntent();
         if(intent != null){
-            String pokemontype = intent.getStringExtra("pokemon_type");
-            final int type = Integer.parseInt(pokemontype);
-            Log.e("TYPE", pokemontype+" "+type);
+            final int type = Integer.parseInt(intent.getStringExtra("pokemon_type"));
             int color = DatabaseManipulator.getColorFromPokemonTypeId(type);
             final Cursor cursor = DatabaseManipulator.getPokemonListByType(this, type);
 
@@ -34,11 +32,6 @@ public class PokemonTypeList extends AppCompatActivity {
                 int x=0;
 
                 do{
-                    Log.e("TEST", ""+cursor.getInt(cursor.getColumnIndex("_id")) + ", "
-                            +cursor.getString(cursor.getColumnIndex("pokemon_name"))
-                            +cursor.getString(cursor.getColumnIndex("pokemon_height"))
-                            +cursor.getString(cursor.getColumnIndex("pokemon_weight"))
-                            +cursor.getString(cursor.getColumnIndex("ability")));
                     pokemonId[x] = cursor.getInt(cursor.getColumnIndex("_id"));
 
                     int resourceID = DatabaseManipulator.getImageFromPokemonId(pokemonId[x]);
@@ -58,7 +51,6 @@ public class PokemonTypeList extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                         Intent anotherIntent = new Intent(view.getContext(), PokemonInfoActivity.class);
                         anotherIntent.putExtra("pokemon_id",String.valueOf(pokemonId[position]));
-                        Log.e("POKEMON TYPE LIST","putting pokemon ID"+pokemonId[position]);
                         startActivity(anotherIntent);
                     }
                 });

@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sharearide.research.jnapor.pokedex.data.DatabaseManipulator;
-import com.sharearide.research.jnapor.pokedex.data.PokedexContract;
 
 public class PokemonInfoActivity extends AppCompatActivity {
 
@@ -22,19 +21,12 @@ public class PokemonInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent != null){
             String pokemonNumber = intent.getStringExtra("pokemon_id");
-            Log.e("POKEMON INFO", "ID IS :"+pokemonNumber);
             int id = Integer.parseInt(pokemonNumber);
             int imageResourceId = DatabaseManipulator.getImageFromPokemonId(id);
 
             Cursor cursor = DatabaseManipulator.getPokemonById(this, id);
 
             if(cursor.moveToFirst()){
-                Log.e("POKEMON INFO", ""+cursor.getInt(cursor.getColumnIndex("_id")) + ", "
-                        +cursor.getString(cursor.getColumnIndex("pokemon_name"))
-                        +cursor.getString(cursor.getColumnIndex("pokemon_height"))
-                        +cursor.getString(cursor.getColumnIndex("pokemon_weight"))
-                        +cursor.getString(cursor.getColumnIndex("ability")));
-
                 LinearLayout parentLayout = (LinearLayout) findViewById(R.id.pokemon_info_mainLayout);
                 RelativeLayout firstRelativeLayout = (RelativeLayout) parentLayout
                         .findViewById(R.id.pokemon_image_parentlayout);
@@ -77,6 +69,8 @@ public class PokemonInfoActivity extends AppCompatActivity {
             }else{
                 Log.e("POKEMON INFO ACTIVITY", "EMPTY CURSOR");
             }
+
+            cursor.close();
         }else{
             Log.e("POKEMON INFO ACTIVITY", "EMPTY INTENT");
         }
