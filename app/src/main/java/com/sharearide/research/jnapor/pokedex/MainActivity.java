@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(view.getContext(), PokemonTypeList.class);
+                Intent intent = new Intent(view.getContext(), ViewPagerActivity.class);
                 intent.putExtra("pokemon_type",String.valueOf(position+1));
                 startActivity(intent);
             }

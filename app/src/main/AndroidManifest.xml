@@ -21,8 +21,16 @@
             android:authorities="com.sharearide.research.jnapor.pokedex" />
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".PokemonTypeList" />
-        <activity android:name=".PokemonInfoActivity"/>
+        <activity android:name=".PokemonInfoActivity" />
+        <activity
+            android:name=".ViewPagerActivity"
+            android:label="@string/pokemon"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity">
+            </meta-data>
+        </activity>
     </application>
 
 </manifest>

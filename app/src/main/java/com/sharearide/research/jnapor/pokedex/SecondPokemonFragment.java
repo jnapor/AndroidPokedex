@@ -1,7 +1,6 @@
 package com.sharearide.research.jnapor.pokedex;
 
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,23 +8,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sharearide.research.jnapor.pokedex.data.DatabaseManipulator;
 
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FirstPokemonFragment extends Fragment {
+public class SecondPokemonFragment extends Fragment {
 
-    public FirstPokemonFragment() {
+
+    public SecondPokemonFragment() {
         // Required empty public constructor
     }
 
@@ -41,7 +38,7 @@ public class FirstPokemonFragment extends Fragment {
         Cursor cursor = DatabaseManipulator.getPokemonById(getActivity(), id);
 
         if(cursor.moveToFirst()){
-            Log.e("FIRST FRAGMENT", String.valueOf(cursor.getInt(cursor.getColumnIndex("_id")))
+            Log.e("SECOND FRAGMENT", String.valueOf(cursor.getInt(cursor.getColumnIndex("_id")))
                     +cursor.getString(cursor.getColumnIndex("pokemon_name")));
 
             int pokemonId = cursor.getInt(cursor.getColumnIndex("_id"));
@@ -84,11 +81,11 @@ public class FirstPokemonFragment extends Fragment {
 
             TextView pokemonAbilityData = (TextView) pokemonAbility.findViewById(R.id.pokemon_ability_data);
             pokemonAbilityData.setText(cursor.getString(cursor.getColumnIndex("ability")));
+
         }else{
-            Log.e("FIRST FRAGMENT", "CURSOR IS EMPTY");
+            Log.e("SECOND FRAGMENT", "CURSOR IS EMPTY");
         }
 
-        Log.e("FirstPokemonFragment", String.valueOf(id));
         return rootView;
     }
 }
